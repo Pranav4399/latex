@@ -1,187 +1,158 @@
 # LaTeX Resume Customizer
 
-A modern web-based application for customizing LaTeX resume bullet points with real-time PDF generation.
+A web-based tool for customizing LaTeX resume content with an intuitive interface. Edit your resume bullet points, preview the generated LaTeX code, and export it for compilation in Overleaf or your local LaTeX environment.
 
-## Features
+## ✨ Features
 
-- 🎯 **Interactive Bullet Point Editor**: Organize and edit resume bullets by company
-- 🔄 **Smart Replacement System**: Choose from 30+ professional bullet point templates
-- 📄 **Direct PDF Generation**: Compile LaTeX to PDF using SwiftLaTeX WebAssembly (no installation required)
-- 🚀 **Modern Node.js Backend**: Fast, reliable server with proper error handling
-- 📱 **Responsive Design**: Works on desktop and mobile devices
-- 🎨 **Beautiful UI**: Modern gradient design with smooth animations
+- **Interactive Resume Editor**: Load and edit your LaTeX resume content
+- **Bullet Point Customization**: Easily modify job experience bullet points
+- **Persistent Replacement Points**: Manage and store custom bullet points using Vercel Edge Config
+- **Live LaTeX Preview**: View generated LaTeX code in real-time
+- **Copy & Export**: Copy LaTeX code to clipboard or download as .tex file
+- **Company-Organized Interface**: Bullet points grouped by company for easy navigation
+- **Responsive Design**: Works on desktop and mobile devices
 
-## Prerequisites
+## 🚀 Quick Start
 
-- **Node.js** (v14 or higher)
-- Modern web browser
+### Local Development
 
-**No LaTeX installation required!** This application uses SwiftLaTeX WebAssembly engine for PDF compilation.
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd latex-resume-customizer
+   ```
 
-## Quick Start
-
-1. **Install Dependencies**
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-2. **Start the Server**
+3. **Start the development server**
    ```bash
    npm start
    ```
-   
-   Or for development with auto-restart:
-   ```bash
-   npm run dev
-   ```
 
-3. **Open Your Browser**
+4. **Open your browser**
    Navigate to `http://localhost:3000`
 
-## Project Structure
+### Deploy to Vercel
+
+1. **Push your code to GitHub**
+   ```bash
+   git add .
+   git commit -m "Initial commit"
+   git push origin main
+   ```
+
+2. **Deploy to Vercel**
+   - Go to [vercel.com](https://vercel.com)
+   - Import your GitHub repository
+   - Vercel will automatically detect the configuration from `vercel.json`
+   - Deploy with default settings
+
+3. **Your app is live!**
+   Vercel will provide you with a live URL for your LaTeX Resume Customizer.
+
+## 📁 Project Structure
 
 ```
 latex-resume-customizer/
-├── package.json              # Node.js dependencies and scripts
-├── server.js                 # Express server with LaTeX compilation
-├── main.tex                  # Sample LaTeX resume file
-├── public/                   # Static files served to browser
-│   ├── index.html            # Main application interface
-│   └── replacement-points.js # Bullet point templates
-└── temp/                     # Temporary files (auto-created)
+├── public/
+│   └── index.html          # Main web interface
+├── server.js               # Express server
+├── main.tex                # Your LaTeX resume template
+├── package.json            # Node.js dependencies
+├── vercel.json            # Vercel deployment configuration
+├── .gitignore             # Git ignore rules
+└── README.md              # This file
 ```
 
-## How It Works
+## 🔧 How to Use
 
-### 1. Load Your Resume
-- The app automatically loads `main.tex` on startup
-- Or upload your own LaTeX resume file
-- Extracts bullet points from `\resumeItem{}` commands
+1. **Load Your Resume**
+   - Click "Load main.tex" to load the default resume template
+   - Or upload your own LaTeX file using "Upload Different LaTeX File"
 
-### 2. Edit Bullet Points
-- Bullet points are organized by company from `\resumeSubheading`
-- Edit existing bullets or add new ones
-- Company-specific "Add New Bullet" buttons
+2. **Customize Bullet Points**
+   - Click "🔧 Manage Replacement Points" to access the bullet point library
+   - Edit, add, or remove bullet points with persistent storage
+   - Points are automatically saved and available across deployments (with Edge Config)
+   - Organize points by company/job for easy navigation
 
-### 3. Replace with Templates
-- Click "Replace" on any bullet point
-- Choose from 30+ professional software development bullets
-- Instantly updates your resume content
+3. **Export LaTeX Code**
+   - Click "View & Export LaTeX Code" to see the generated LaTeX
+   - Copy the code to clipboard or download as a .tex file
+   - Paste into [Overleaf](https://overleaf.com) or your local LaTeX editor to compile PDF
 
-### 4. Generate PDF
-- **Direct PDF Generation**: Uses SwiftLaTeX WebAssembly for high-quality output (no installation required)
-- **View LaTeX Code**: Copy or download the modified LaTeX
-- **Error Handling**: Clear error messages with helpful suggestions
+## 🌐 Generating PDF
 
-## API Endpoints
+This application generates LaTeX code that you can compile elsewhere:
 
-- `GET /` - Main application
-- `GET /main.tex` - Load the main LaTeX file
-- `POST /compile-pdf` - Compile LaTeX to PDF
-- `GET /health` - Server health check
+1. **Using Overleaf (Recommended)**
+   - Copy the generated LaTeX code
+   - Paste it into a new project on [Overleaf](https://overleaf.com)
+   - Click "Recompile" to generate your PDF
 
-## LaTeX Requirements
+2. **Using Local LaTeX Installation**
+   - Download the .tex file
+   - Compile using your local LaTeX installation:
+     ```bash
+     pdflatex your-resume.tex
+     ```
 
-Your LaTeX resume should use:
-- `\section{Experience}` for the experience section
-- `\resumeSubheading{Job Title}{Company}{Location}{Date}` for job headers
-- `\resumeItem{bullet point text}` for individual bullet points
+## 🛠 API Endpoints
 
-Example structure:
-```latex
-\section{Experience}
-\resumeSubheading{Software Engineer}{Atlas of Behavior Change}{Remote}{Jan 2023 -- Present}
-\resumeItemListStart
-    \resumeItem{Developed scalable web applications using modern frameworks}
-    \resumeItem{Collaborated with cross-functional teams on feature delivery}
-\resumeItemListEnd
-```
+- `GET /` - Main application interface
+- `GET /main.tex` - Serve the LaTeX template file
+- `GET /api/latex` - Get LaTeX content as JSON
+- `POST /api/latex` - Save LaTeX content (optional)
+- `GET /api/replacement-points` - Get replacement points from Edge Config
+- `POST /api/replacement-points` - Save replacement points
+- `GET /health` - Health check endpoint (includes Edge Config status)
 
-## Customization
+## 🔧 Environment Variables
 
-### Adding New Replacement Points
-Edit `public/replacement-points.js` to add your own bullet point templates:
+- `EDGE_CONFIG` - Vercel Edge Config connection string (automatically set by Vercel)
+- `VERCEL_ENV` - Environment indicator (development/preview/production)
 
-```javascript
-const replacementPoints = [
-    "Your custom bullet point here",
-    "Another professional achievement",
-    // ... add more
-];
-```
+For persistent replacement points storage, set up Edge Config in your Vercel dashboard. See `EDGE_CONFIG_SETUP.md` for detailed instructions.
 
-### Styling
-The application uses embedded CSS in `public/index.html`. Key design elements:
-- CSS Grid layout for responsive design
-- Gradient backgrounds and modern shadows
-- Smooth hover animations
-- Modal dialogs for replacement selection
+## 📦 Dependencies
 
-## Troubleshooting
-
-### PDF Generation Issues
-
-**Error: "pdflatex not found"**
-- Install a LaTeX distribution (TeX Live, MiKTeX)
-- Ensure `pdflatex` is in your system PATH
-- Test with: `pdflatex --version`
-
-**Error: "LaTeX compilation failed"**
-- Check your LaTeX syntax
-- Ensure all required packages are installed
-- Use "View LaTeX Code" to debug manually
-
-### File Loading Issues
-
-**Error: "main.tex not found"**
-- Ensure `main.tex` exists in the project root
-- Use "Upload Different LaTeX File" as alternative
-
-## Development
-
-### Running in Development Mode
-```bash
-npm run dev
-```
-Uses `nodemon` for automatic server restart on file changes.
-
-### Project Dependencies
 - **express**: Web server framework
-- **fs-extra**: Enhanced file system operations
-- **uuid**: Unique session ID generation
 - **cors**: Cross-origin resource sharing
-- **multer**: File upload handling (for future features)
+- **fs-extra**: Enhanced file system operations
+- **@vercel/edge-config**: Vercel Edge Config SDK for persistent storage
 
-## Deployment
-
-The application can be deployed to:
-- **Heroku**: Add `engines` field in package.json
-- **Railway**: Direct deployment from Git
-- **DigitalOcean App Platform**: Node.js app deployment
-- **Self-hosted**: Any server with Node.js and LaTeX
-
-**Note**: Ensure your deployment environment has LaTeX installed for PDF generation.
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## License
+## 📄 License
 
-MIT License - see LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Support
+## 🆘 Support
 
-For issues and questions:
-1. Check the troubleshooting section
-2. Review server logs in the console
-3. Use "View LaTeX Code" for manual debugging
-4. Open an issue on GitHub
+If you encounter any issues:
+
+1. Check that your LaTeX syntax is valid
+2. Ensure all required LaTeX packages are available in your compilation environment
+3. Try the "View & Export LaTeX Code" option to debug manually
+4. Open an issue on GitHub with details about the problem
+
+## 🎯 Future Enhancements
+
+- [ ] Support for multiple resume templates
+- [ ] Real-time LaTeX syntax highlighting
+- [ ] Integration with more LaTeX editors
+- [ ] Template customization options
+- [ ] Export to different formats
 
 ---
 
-**Happy resume customizing!** 🚀 
+Made with ❤️ for the LaTeX community 

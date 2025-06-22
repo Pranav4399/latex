@@ -1,7 +1,7 @@
 {
   "name": "latex-resume-customizer",
   "version": "1.0.0",
-  "description": "A web-based LaTeX resume customizer with PDF generation",
+  "description": "A web-based LaTeX resume customizer",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -10,18 +10,17 @@
   "keywords": [
     "latex",
     "resume",
-    "pdf",
-    "customizer"
+    "editor",
+    "customizer",
+    "vercel"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@vercel/edge-config": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "fs-extra": "^11.1.1",
-    "multer": "^1.4.5-lts.1",
-    "node-pdflatex": "^0.3.0",
-    "uuid": "^9.0.1"
+    "fs-extra": "^11.1.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
