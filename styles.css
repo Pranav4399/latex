@@ -1,0 +1,413 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f8f9fa;
+    min-height: 100vh;
+    padding: 20px;
+    color: #2d3748;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+.header {
+    background: #ffffff;
+    color: #2d3748;
+    padding: 32px;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.header h1 {
+    font-size: 2.25rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #1a202c;
+}
+
+.header p {
+    color: #718096;
+    font-size: 1rem;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 70vh;
+}
+
+.editor-section,
+.pdf-section {
+    padding: 32px;
+}
+
+.editor-section {
+    border-right: 1px solid #e2e8f0;
+    background: #fafbfc;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    margin-bottom: 24px;
+    color: #1a202c;
+    font-weight: 600;
+}
+
+.file-controls {
+    margin-bottom: 24px;
+    display: grid;
+    gap: 16px;
+}
+
+.file-input-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.file-input-group label {
+    font-weight: 500;
+    color: #4a5568;
+    min-width: 120px;
+}
+
+.file-name-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.file-name-input:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.file-input {
+    display: none;
+}
+
+.file-label {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #3182ce;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.file-label:hover {
+    background: #2c5aa0;
+}
+
+.latex-editor {
+    width: 100%;
+    height: 300px;
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 16px;
+    resize: vertical;
+    background: white;
+    transition: border-color 0.2s ease;
+    line-height: 1.5;
+}
+
+.latex-editor:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.bullet-points {
+    margin-top: 24px;
+}
+
+.bullet-point {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s ease;
+}
+
+.bullet-point:hover {
+    border-color: #cbd5e0;
+}
+
+.bullet-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+    line-height: 1.4;
+}
+
+.bullet-input:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.bullet-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+    background: #3182ce;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #2c5aa0;
+}
+
+.btn-remove {
+    background: #e53e3e;
+    color: white;
+}
+
+.btn-remove:hover {
+    background: #c53030;
+}
+
+.btn-replace {
+    background: #d69e2e;
+    color: white;
+}
+
+.btn-replace:hover {
+    background: #b7791f;
+}
+
+.btn-add {
+    background: #38a169;
+    color: white;
+}
+
+.btn-add:hover {
+    background: #2f855a;
+}
+
+.status {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-weight: 500;
+    display: none;
+    font-size: 14px;
+}
+
+.status.success {
+    background: #f0fff4;
+    color: #22543d;
+    border: 1px solid #9ae6b4;
+    display: block;
+}
+
+.status.error {
+    background: #fed7d7;
+    color: #742a2a;
+    border: 1px solid #feb2b2;
+    display: block;
+}
+
+.status.loading {
+    background: #ebf8ff;
+    color: #2a4365;
+    border: 1px solid #90cdf4;
+    display: block;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    animation: modalSlideIn 0.2s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    background: #ffffff;
+    color: #1a202c;
+    padding: 24px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.close {
+    color: #718096;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close:hover {
+    color: #2d3748;
+}
+
+.replacement-point {
+    padding: 16px;
+    margin: 12px;
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.replacement-point:hover {
+    background: #edf2f7;
+    border-color: #3182ce;
+}
+
+.btn-export {
+    background: #d69e2e;
+}
+
+#latexCodeDisplay {
+    background: #f7fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    user-select: all;
+    cursor: text;
+}
+
+#latexCodeDisplay::-webkit-scrollbar {
+    width: 6px;
+}
+
+#latexCodeDisplay::-webkit-scrollbar-track {
+    background: #edf2f7;
+    border-radius: 3px;
+}
+
+#latexCodeDisplay::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 3px;
+}
+
+#latexCodeDisplay::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .editor-section {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+
+    .container {
+        margin: 10px;
+        border-radius: 12px;
+    }
+
+    .header h1 {
+        font-size: 1.875rem;
+    }
+
+    .section-title {
+        font-size: 1.125rem;
+    }
+
+    .file-input-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .file-input-group label {
+        min-width: auto;
+    }
+} 

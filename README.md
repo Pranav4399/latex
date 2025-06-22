@@ -1,68 +1,61 @@
 # LaTeX Resume Customizer
 
-A web-based tool for customizing LaTeX resume content with an intuitive interface. Edit your resume bullet points, preview the generated LaTeX code, and export it for compilation in Overleaf or your local LaTeX environment.
+A **static web-based tool** for customizing LaTeX resume content with an intuitive interface. Edit your resume bullet points, preview the generated LaTeX code, and export it for compilation in Overleaf or your local LaTeX environment.
 
 ## ✨ Features
 
 - **Interactive Resume Editor**: Load and edit your LaTeX resume content
 - **Bullet Point Customization**: Easily modify job experience bullet points
-- **Persistent Replacement Points**: Manage and store custom bullet points using Vercel Edge Config
+- **Persistent Replacement Points**: Manage and store custom bullet points using localStorage
 - **Live LaTeX Preview**: View generated LaTeX code in real-time
 - **Copy & Export**: Copy LaTeX code to clipboard or download as .tex file
 - **Company-Organized Interface**: Bullet points grouped by company for easy navigation
 - **Responsive Design**: Works on desktop and mobile devices
+- **No Server Required**: Pure HTML/CSS/JavaScript - works offline!
 
 ## 🚀 Quick Start
 
-### Local Development
+### Static File Usage (Recommended)
 
-1. **Clone the repository**
+1. **Clone or download the repository**
    ```bash
    git clone <your-repo-url>
    cd latex-resume-customizer
    ```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+2. **Open the HTML file**
+   - Simply double-click `index.html` to open in your browser
+   - Or serve it with any static file server:
+     ```bash
+     # Using Python
+     python3 -m http.server 8000
+     
+     # Using Node.js (if you have it)
+     npx serve .
+     
+     # Using any other static file server
+     ```
 
-3. **Start the development server**
-   ```bash
-   npm start
-   ```
+3. **Start customizing**
+   - Your LaTeX file should be named `main.tex` in the same directory
+   - Or upload any LaTeX file using the file picker
 
-4. **Open your browser**
-   Navigate to `http://localhost:3000`
+### Deploy Anywhere
 
-### Deploy to Vercel
+Since this is now a static site, you can deploy it to any static hosting service:
 
-1. **Push your code to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-
-2. **Deploy to Vercel**
-   - Go to [vercel.com](https://vercel.com)
-   - Import your GitHub repository
-   - Vercel will automatically detect the configuration from `vercel.json`
-   - Deploy with default settings
-
-3. **Your app is live!**
-   Vercel will provide you with a live URL for your LaTeX Resume Customizer.
+- **GitHub Pages**: Push to a GitHub repo and enable Pages
+- **Netlify**: Drag and drop the files or connect your Git repo
+- **Vercel**: Deploy static files without server configuration
+- **Any web server**: Upload the files to any web hosting service
 
 ## 📁 Project Structure
 
 ```
 latex-resume-customizer/
-├── public/
-│   └── index.html          # Main web interface
-├── server.js               # Express server
+├── index.html              # Main web interface (standalone)
 ├── main.tex                # Your LaTeX resume template
-├── package.json            # Node.js dependencies
-├── vercel.json            # Vercel deployment configuration
+├── replacement-points.json # Default replacement points (optional)
 ├── .gitignore             # Git ignore rules
 └── README.md              # This file
 ```
@@ -75,8 +68,8 @@ latex-resume-customizer/
 
 2. **Customize Bullet Points**
    - Click "🔧 Manage Replacement Points" to access the bullet point library
-   - Edit, add, or remove bullet points with persistent storage
-   - Points are automatically saved and available across deployments (with Edge Config)
+   - Edit, add, or remove bullet points with persistent localStorage storage
+   - Points are automatically saved and available across browser sessions
    - Organize points by company/job for easy navigation
 
 3. **Export LaTeX Code**
@@ -100,29 +93,18 @@ This application generates LaTeX code that you can compile elsewhere:
      pdflatex your-resume.tex
      ```
 
-## 🛠 API Endpoints
+## 💾 Data Storage
 
-- `GET /` - Main application interface
-- `GET /main.tex` - Serve the LaTeX template file
-- `GET /api/latex` - Get LaTeX content as JSON
-- `POST /api/latex` - Save LaTeX content (optional)
-- `GET /api/replacement-points` - Get replacement points from Edge Config
-- `POST /api/replacement-points` - Save replacement points
-- `GET /health` - Health check endpoint (includes Edge Config status)
+- **Replacement Points**: Stored in browser localStorage for persistence across sessions
+- **LaTeX Files**: Loaded from local files or uploaded via file picker
+- **No Server Required**: All data processing happens in the browser
 
-## 🔧 Environment Variables
+## 🔧 Browser Requirements
 
-- `EDGE_CONFIG` - Vercel Edge Config connection string (automatically set by Vercel)
-- `VERCEL_ENV` - Environment indicator (development/preview/production)
-
-For persistent replacement points storage, set up Edge Config in your Vercel dashboard. See `EDGE_CONFIG_SETUP.md` for detailed instructions.
-
-## 📦 Dependencies
-
-- **express**: Web server framework
-- **cors**: Cross-origin resource sharing
-- **fs-extra**: Enhanced file system operations
-- **@vercel/edge-config**: Vercel Edge Config SDK for persistent storage
+- **Modern Browser**: Chrome, Firefox, Safari, Edge (ES6+ support required)
+- **File API Support**: For loading local LaTeX files
+- **localStorage**: For persistent replacement points storage
+- **Clipboard API**: For copy-to-clipboard functionality (optional)
 
 ## 🤝 Contributing
 

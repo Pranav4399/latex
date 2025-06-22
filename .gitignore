@@ -210,3 +210,5 @@ test.pdf
 test*.pdf
 output*.pdf
 resume_*.pdf
+
+.cursor/

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LaTeX Resume Customizer</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>LaTeX Resume Customizer</h1>
+                <p>
+                    Customize your resume bullet points and export LaTeX code
+                </p>
+            </div>
+
+            <div class="main-content">
+                <div class="editor-section">
+                    <h2 class="section-title">📝 Resume Editor</h2>
+
+                    <div class="file-controls">
+                        <div class="file-input-group">
+                            <button
+                                class="btn btn-primary"
+                                onclick="loadMainTexFile()"
+                                style="width: 100%; justify-content: center;"
+                            >
+                                📁 Load main.tex
+                            </button>
+                        </div>
+
+                        <div class="file-input-group">
+                            <input
+                                type="file"
+                                id="latexFile"
+                                class="file-input"
+                                accept=".tex,.txt"
+                            />
+                            <label for="latexFile" class="file-label"
+                                >📄 Or Upload Different LaTeX File</label
+                            >
+                        </div>
+                    </div>
+
+                    <div id="status"></div>
+
+                    <textarea
+                        id="latexEditor"
+                        class="latex-editor"
+                        placeholder="Your LaTeX resume content will appear here..."
+                    ></textarea>
+
+                    <div class="bullet-points">
+                        <h3 class="section-title">
+                            🎯 Customize Job Experience Bullets
+                        </h3>
+                        <div style="margin-bottom: 15px;">
+                            <button 
+                                onclick="openReplacementPointsManager()" 
+                                class="btn btn-primary"
+                                style="background: linear-gradient(135deg, #6c757d, #495057); border: none; padding: 8px 16px; font-size: 14px; border-radius: 6px;"
+                            >
+                                🔧 Manage Replacement Points
+                            </button>
+                        </div>
+                        <div id="bulletPointsList"></div>
+                    </div>
+                </div>
+
+                <div class="pdf-section">
+                    <h2 class="section-title">📄 LaTeX Export</h2>
+
+                    <div id="pdfStatus"></div>
+
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button
+                            id="viewLatexBtn"
+                            class="btn btn-primary"
+                            onclick="viewLatexFile()"
+                            style="flex: 1; min-width: 200px; background: linear-gradient(135deg, #3498db, #2980b9); border: none; border-radius: 10px; color: white; padding: 15px 30px; font-size: 16px; font-weight: 600; transition: all 0.3s ease;"
+                        >
+                            👁️ View & Export LaTeX Code
+                        </button>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 15px; background: #e8f4f8; border-radius: 10px; border-left: 4px solid #3498db;">
+                        <h4 style="margin: 0 0 10px 0; color: #2c3e50;">💡 How to Generate PDF:</h4>
+                        <ol style="margin: 0; padding-left: 20px; color: #34495e;">
+                            <li>Click "View & Export LaTeX Code" above</li>
+                            <li>Copy the generated LaTeX code</li>
+                            <li>Paste it into <a href="https://overleaf.com" target="_blank" style="color: #3498db; font-weight: 600;">Overleaf</a> or your local LaTeX editor</li>
+                            <li>Compile to generate your PDF resume</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Replacement Points Modal -->
+        <div id="replacementModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>🔄 Replace Bullet Point</h3>
+                    <span class="close" onclick="closeReplacementModal()">&times;</span>
+                </div>
+                <div id="replacementPointsList">
+                    <!-- Replacement points will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- LaTeX Viewer Modal -->
+        <div id="latexViewerModal" class="modal">
+            <div class="modal-content" style="width: 90%; max-width: 1000px; max-height: 90vh;">
+                <div class="modal-header">
+                    <h3>👁️ Your Customized LaTeX Resume Code</h3>
+                    <span class="close" onclick="closeLatexViewerModal()">&times;</span>
+                </div>
+                <div style="padding: 20px;">
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <button 
+                            id="copyLatexBtn"
+                            class="btn btn-primary"
+                            onclick="copyLatexToClipboard()"
+                            style="background: linear-gradient(135deg, #28a745, #20c997); border: none; padding: 8px 16px; font-size: 14px;"
+                        >
+                            📋 Copy to Clipboard
+                        </button>
+                        <button 
+                            id="downloadLatexBtn"
+                            class="btn btn-primary"
+                            onclick="downloadLatexFromViewer()"
+                            style="background: linear-gradient(135deg, #6c757d, #495057); border: none; padding: 8px 16px; font-size: 14px;"
+                        >
+                            📥 Download File
+                        </button>
+                    </div>
+                    <pre id="latexCodeDisplay" style="
+                        background: #f8f9fa;
+                        border: 1px solid #dee2e6;
+                        border-radius: 8px;
+                        padding: 20px;
+                        max-height: 60vh;
+                        overflow-y: auto;
+                        font-family: 'Courier New', monospace;
+                        font-size: 13px;
+                        line-height: 1.4;
+                        white-space: pre-wrap;
+                        word-wrap: break-word;
+                    "></pre>
+                </div>
+            </div>
+        </div>
+
+                <script src="script.js"></script>
+    </body>
+</html>
+</code_block_to_apply_changes_from> 
