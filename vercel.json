@@ -1,12 +1,7 @@
 {
   "version": 2,
   "name": "latex-resume-customizer",
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
+
   "routes": [
     {
       "src": "/api/(.*)",
