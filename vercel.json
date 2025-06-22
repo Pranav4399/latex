@@ -1,7 +1,15 @@
 {
   "version": 2,
   "name": "latex-resume-customizer",
-
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
+    }
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
@@ -20,11 +28,6 @@
       "dest": "/public/$1"
     }
   ],
-  "functions": {
-    "server.js": {
-      "maxDuration": 10
-    }
-  },
   "env": {
     "NODE_ENV": "production"
   }
