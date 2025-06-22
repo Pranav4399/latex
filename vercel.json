@@ -4,10 +4,11 @@
   "builds": [
     {
       "src": "server.js",
-      "use": "@vercel/node",
-      "config": {
-        "maxLambdaSize": "50mb"
-      }
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -24,8 +25,20 @@
       "dest": "/server.js"
     },
     {
-      "src": "/(.*)",
+      "src": "/replacement-points.js",
+      "dest": "/public/replacement-points.js"
+    },
+    {
+      "src": "/",
+      "dest": "/public/index.html"
+    },
+    {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
       "dest": "/public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
     }
   ],
   "env": {
